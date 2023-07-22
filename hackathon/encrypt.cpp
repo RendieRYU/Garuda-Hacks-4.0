@@ -1,8 +1,3 @@
-#include <iostream>
-#include <vector>
-
-
-extern "C"{
 // Fungsi untuk melakukan operasi XOR antara dua blok 128-bit
 void xorBlocks(const unsigned char *block1, const unsigned char *block2, unsigned char *result) {
     for (int i = 0; i < 16; ++i) {
@@ -90,10 +85,10 @@ unsigned char gf_mul(unsigned char a, unsigned char b) {
 // Fungsi mix columns
 void mixColumns(unsigned char *block) {
     static const unsigned char matrix[4][4] = {
-        {0x02, 0x03, 0x01, 0x01},
-        {0x01, 0x02, 0x03, 0x01},
-        {0x01, 0x01, 0x02, 0x03},
-        {0x03, 0x01, 0x01, 0x02}
+        { 0x0e, 0x0b, 0x0d, 0x09 },
+        { 0x09, 0x0e, 0x0b, 0x0d },
+        { 0x0d, 0x09, 0x0e, 0x0b },
+        { 0x0b, 0x0d, 0x09, 0x0e }
     };
 
     unsigned char temp[4][4];
@@ -121,7 +116,7 @@ void addRoundKey(unsigned char *block, const unsigned char *roundKey) {
     }
 }
 
-
+extern "C"{
     // Fungsi enkripsi AES
     void encryptAES(const unsigned char *plainText, const unsigned char *key, unsigned char *cipherText) {
         // Inisialisasi kunci dan blok
@@ -149,29 +144,3 @@ void addRoundKey(unsigned char *block, const unsigned char *roundKey) {
         }
     }
 }
-
-
-// int main() {
-//     // Data yang akan dienkripsi
-//     unsigned char plainText[] = "Ini adalah contoh teks yang akan dienkripsi dengan AES.";
-//     int sizePt = sizeof(plainText)/sizeof(plainText[0]);
-//     std::cout << sizePt << std::endl;
-
-//     // Kunci enkripsi (128-bit)
-//     unsigned char key[] = "admin";
-
-//     // Hasil enkripsi
-//     unsigned char cipherText[16];
-//     encryptAES(plainText, key, cipherText);
-
-//     std::cout << "Kata yang akan di enkripsi: ";
-//     std::cout << plainText << std::endl;
-//     // Menampilkan hasil enkripsi
-//     std::cout << "Hasil Enkripsi: ";
-//     for (int i = 0; i < 16; ++i) {
-//         std::cout << std::hex << (int)cipherText[i];
-//     }
-//     std::cout << std::endl;
-
-//     return 0;
-// }
